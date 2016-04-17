@@ -12,6 +12,12 @@
 		3F47DEE81CBFF5F40085ACDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEE61CBFF5F40085ACDA /* Main.storyboard */; };
 		3F47DEEA1CBFF5F40085ACDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEE91CBFF5F40085ACDA /* Assets.xcassets */; };
 		3F47DEED1CBFF5F40085ACDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEEB1CBFF5F40085ACDA /* LaunchScreen.storyboard */; };
+		3F47DF031CC004A60085ACDA /* cheese.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEF91CC004A60085ACDA /* cheese.mp3 */; };
+		3F47DF041CC004A60085ACDA /* hachiko.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEFA1CC004A60085ACDA /* hachiko.mp3 */; };
+		3F47DF051CC004A60085ACDA /* happy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEFB1CC004A60085ACDA /* happy.mp3 */; };
+		3F47DF061CC004A60085ACDA /* night.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEFC1CC004A60085ACDA /* night.mp3 */; };
+		3F47DF071CC004A60085ACDA /* future.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F47DEFD1CC004A60085ACDA /* future.mp3 */; };
+		3FC2CE511CC0F950006CEEFC /* ColeccionCanciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2CE501CC0F950006CEEFC /* ColeccionCanciones.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		3F47DEE91CBFF5F40085ACDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F47DEEC1CBFF5F40085ACDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F47DEEE1CBFF5F40085ACDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F47DEF91CC004A60085ACDA /* cheese.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cheese.mp3; sourceTree = "<group>"; };
+		3F47DEFA1CC004A60085ACDA /* hachiko.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hachiko.mp3; sourceTree = "<group>"; };
+		3F47DEFB1CC004A60085ACDA /* happy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = happy.mp3; sourceTree = "<group>"; };
+		3F47DEFC1CC004A60085ACDA /* night.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = night.mp3; sourceTree = "<group>"; };
+		3F47DEFD1CC004A60085ACDA /* future.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = future.mp3; sourceTree = "<group>"; };
+		3FC2CE501CC0F950006CEEFC /* ColeccionCanciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColeccionCanciones.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,12 @@
 				3F47DEE91CBFF5F40085ACDA /* Assets.xcassets */,
 				3F47DEEB1CBFF5F40085ACDA /* LaunchScreen.storyboard */,
 				3F47DEEE1CBFF5F40085ACDA /* Info.plist */,
+				3F47DEF91CC004A60085ACDA /* cheese.mp3 */,
+				3F47DEFA1CC004A60085ACDA /* hachiko.mp3 */,
+				3F47DEFB1CC004A60085ACDA /* happy.mp3 */,
+				3F47DEFC1CC004A60085ACDA /* night.mp3 */,
+				3F47DEFD1CC004A60085ACDA /* future.mp3 */,
+				3FC2CE501CC0F950006CEEFC /* ColeccionCanciones.swift */,
 			);
 			path = reproductorMusica;
 			sourceTree = "<group>";
@@ -124,8 +142,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F47DEED1CBFF5F40085ACDA /* LaunchScreen.storyboard in Resources */,
+				3F47DF071CC004A60085ACDA /* future.mp3 in Resources */,
+				3F47DF051CC004A60085ACDA /* happy.mp3 in Resources */,
 				3F47DEEA1CBFF5F40085ACDA /* Assets.xcassets in Resources */,
 				3F47DEE81CBFF5F40085ACDA /* Main.storyboard in Resources */,
+				3F47DF031CC004A60085ACDA /* cheese.mp3 in Resources */,
+				3F47DF041CC004A60085ACDA /* hachiko.mp3 in Resources */,
+				3F47DF061CC004A60085ACDA /* night.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +161,7 @@
 			files = (
 				3F47DEE51CBFF5F40085ACDA /* ViewController.swift in Sources */,
 				3F47DEE31CBFF5F40085ACDA /* AppDelegate.swift in Sources */,
+				3FC2CE511CC0F950006CEEFC /* ColeccionCanciones.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +313,7 @@
 				3F47DEF31CBFF5F40085ACDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
