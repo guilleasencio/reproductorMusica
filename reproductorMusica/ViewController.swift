@@ -20,78 +20,28 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBOutlet weak var volumenSlider: UISlider!
     
+    @IBOutlet weak var cancionLabel: UILabel!
+    
+    @IBOutlet weak var autorLabel: UILabel!
+    
+    @IBOutlet weak var discoLabel: UILabel!
     
     let coleccionCanciones: ColeccionCanciones = ColeccionCanciones()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cancionPicker.selectRow(0, inComponent: 0, animated: false)
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    @IBAction func siguienteCancion() {
-        
-        self.stop()
-        
-        let proximaCancion = (self.cancionPicker.selectedRowInComponent(0) + 1) % self.coleccionCanciones.canciones.count
-        self.cancionPicker.selectRow(proximaCancion, inComponent: 0, animated: true)
-        
-        self.portada.image = self.coleccionCanciones.canciones[proximaCancion].portada
-        
-        let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[proximaCancion].nombreFichero, withExtension: "mp3")
-        
-        do{
-            try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
-            reproductor.volume = self.volumenSlider.value
-            
-            self.play()
-
-            self.reproductor.delegate = self
-        }catch{
-            print("Error al cargar el archivo de sonido")
-        }
-
-
-        
-    }
-    
-    @IBAction func cancionAnterior() {
-        
-       
-        self.stop()
-        
-        var proximaCancion = (self.cancionPicker.selectedRowInComponent(0) - 1) % self.coleccionCanciones.canciones.count
-        
-        if proximaCancion < 0{
-            proximaCancion += self.coleccionCanciones.canciones.count
-        }
-        
-        self.cancionPicker.selectRow(proximaCancion, inComponent: 0, animated: true)
-        
-        self.portada.image = self.coleccionCanciones.canciones[proximaCancion].portada
-        
-        let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[proximaCancion].nombreFichero, withExtension: "mp3")
-        
-        do{
-            try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
-            reproductor.volume = self.volumenSlider.value
-            
-            self.play()
-            
-            self.reproductor.delegate = self
-        }catch{
-            print("Error al cargar el archivo de sonido")
-        }
-
-    }
-    
     
     override func viewWillAppear(animated: Bool) {
         
         let indice = self.cancionPicker.selectedRowInComponent(0)
         
         self.portada.image = self.coleccionCanciones.canciones[indice].portada
+        
+        self.cancionLabel.text = self.coleccionCanciones.canciones[indice].nombre
+        self.autorLabel.text = self.coleccionCanciones.canciones[indice].autor
+        self.discoLabel.text = self.coleccionCanciones.canciones[indice].disco
         
         let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[indice].nombreFichero, withExtension: "mp3")
         do{
@@ -107,6 +57,30 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
 
         
     }
+    
+    func cambiarCancion(proximaCancion: Int){
+        
+        self.stop()
+        self.cancionPicker.selectRow(proximaCancion, inComponent: 0, animated: true)
+        self.portada.image = self.coleccionCanciones.canciones[proximaCancion].portada
+        
+        self.cancionLabel.text = self.coleccionCanciones.canciones[proximaCancion].nombre
+        self.autorLabel.text = self.coleccionCanciones.canciones[proximaCancion].autor
+        self.discoLabel.text = self.coleccionCanciones.canciones[proximaCancion].disco
+        let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[proximaCancion].nombreFichero, withExtension: "mp3")
+        do{
+            try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
+            reproductor.volume = self.volumenSlider.value
+            
+            self.play()
+            
+            self.reproductor.delegate = self
+        }catch{
+            print("Error al cargar el archivo de sonido")
+        }
+        
+    }    
+    
     @IBAction func controlarVolumen(sender: UISlider) {
         reproductor.volume = sender.value
     }
@@ -133,19 +107,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.stop()
-        self.portada.image = self.coleccionCanciones.canciones[row].portada
-        
-        let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[row].nombreFichero, withExtension: "mp3")
-        do{
-            try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
-            reproductor.volume = self.volumenSlider.value
-            self.play()
-            self.reproductor.delegate = self
-        }catch{
-            print("Error al cargar el archivo de sonido")
-        }
-
+        self.cambiarCancion(row)
     }
     
     @IBAction func play() {
@@ -176,49 +138,37 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
 
     }
     
+    @IBAction func siguienteCancion() {
+        
+        let proximaCancion = (self.cancionPicker.selectedRowInComponent(0) + 1) % self.coleccionCanciones.canciones.count
+        self.cambiarCancion(proximaCancion)
+    }
+    
+    @IBAction func cancionAnterior() {
+        
+        var proximaCancion = (self.cancionPicker.selectedRowInComponent(0) - 1) % self.coleccionCanciones.canciones.count
+        if proximaCancion < 0{
+            proximaCancion += self.coleccionCanciones.canciones.count
+        }
+        self.cambiarCancion(proximaCancion)
+    }
+
+    
     @IBAction func ordenarAleatorio() {
-        self.stop()
+        
         self.coleccionCanciones.canciones.shuffle()
         self.cancionPicker.reloadComponent(0)
         self.cancionPicker.selectRow(0, inComponent: 0, animated: true)
-        
-        self.portada.image = self.coleccionCanciones.canciones[0].portada
-        
-        let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[0].nombreFichero, withExtension: "mp3")
-        
-        do{
-            try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
-            reproductor.volume = self.volumenSlider.value
-            self.play()
-            self.reproductor.delegate = self
-        }catch{
-            print("Error al cargar el archivo de sonido")
-        }
-        
+        self.cambiarCancion(0)
 
     }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully
         flag: Bool) {
         
-        self.stop()
         if(self.cancionPicker.selectedRowInComponent(0)<self.coleccionCanciones.canciones.count-1){
             let proximaCancion = self.cancionPicker.selectedRowInComponent(0) + 1
-            self.cancionPicker.selectRow(proximaCancion, inComponent: 0, animated: true)
-            
-            self.portada.image = self.coleccionCanciones.canciones[proximaCancion].portada
-            
-            let sonidoURL = NSBundle.mainBundle().URLForResource(self.coleccionCanciones.canciones[proximaCancion].nombreFichero, withExtension: "mp3")
-            
-            do{
-                try reproductor = AVAudioPlayer(contentsOfURL: sonidoURL!)
-                reproductor.volume = self.volumenSlider.value
-                self.play()
-                self.reproductor.delegate = self
-            }catch{
-                print("Error al cargar el archivo de sonido")
-            }
-
+            self.cambiarCancion(proximaCancion)
         }else{
             self.playButton.hidden = false
             self.pauseButton.hidden = true
